@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sale{% endblock %}
+
+{% block body %}
+    <h1>Sale</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sale.id }}</td>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <td>{{ sale.quantity }}</td>
+            </tr>
+            <tr>
+                <th>Ordernumber</th>
+                <td>{{ sale.ordernumber }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ sale.date ? sale.date|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('sale_index') }}">back to list</a>
+
+    <a href="{{ path('sale_edit', {'id': sale.id}) }}">edit</a>
+
+    {{ include('sale/_delete_form.html.twig') }}
+{% endblock %}

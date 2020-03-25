@@ -54,13 +54,20 @@ class Customer
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="customer")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sale", mappedBy="customer")
      */
-    private $orders;
+    private $sales;
 
-    public function __construct()
+    public function __construct($firstname, $lastname, $email, $password, $phone, $address, $createdAt)
     {
-        $this->orders = new ArrayCollection();
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+        $this->email = $email;
+        $this->password = $password;
+        $this->phone = $phone;
+        $this->address = $address;
+        $this->createdAt = $createdAt;
+        $this->sales = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -153,30 +160,30 @@ class Customer
     }
 
     /**
-     * @return Collection|Order[]
+     * @return Collection|Sale[]
      */
-    public function getOrders(): Collection
+    public function getSales(): Collection
     {
-        return $this->orders;
+        return $this->sales;
     }
 
-    public function addOrder(Order $order): self
+    public function addSale(Sale $sale): self
     {
-        if (!$this->orders->contains($order)) {
-            $this->orders[] = $order;
-            $order->setCustomer($this);
+        if (!$this->sales->contains($sale)) {
+            $this->sales[] = $sale;
+            $sale->setCustomer($this);
         }
 
         return $this;
     }
 
-    public function removeOrder(Order $order): self
+    public function removeSale(Sale $sale): self
     {
-        if ($this->orders->contains($order)) {
-            $this->orders->removeElement($order);
+        if ($this->sales->contains($sale)) {
+            $this->sales->removeElement($sale);
             // set the owning side to null (unless already changed)
-            if ($order->getCustomer() === $this) {
-                $order->setCustomer(null);
+            if ($sale->getCustomer() === $this) {
+                $sale->setCustomer(null);
             }
         }
 

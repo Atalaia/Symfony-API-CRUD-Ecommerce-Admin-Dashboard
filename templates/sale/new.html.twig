@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Sale{% endblock %}
+
+{% block body %}
+    <h1>Create new Sale</h1>
+
+    {{ include('sale/_form.html.twig') }}
+
+    <a href="{{ path('sale_index') }}">back to list</a>
+{% endblock %}
